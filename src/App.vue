@@ -3,7 +3,7 @@
     <div class="logo"><span>covid</span>meter</div>
 
     <transition name="slide-fade">
-      <mobileNav v-if="mobileNav"/>
+      <mobileNav v-if="mobileNav" @toggleMobileNav="toggleMobileNav"/>
     </transition>
 
     <div class="nav-links navigation" v-if="!mobileView">
@@ -32,6 +32,7 @@
 <script>
 
 import mobileNav from './components/mobileNav.vue'
+
 
    export default {
   name: 'Home',
@@ -65,6 +66,10 @@ import mobileNav from './components/mobileNav.vue'
               this.mobileNav =  false;
               return;
           }
+      },
+
+      handleCreate(){
+        alert("nav created");
       }
   },
   created(){

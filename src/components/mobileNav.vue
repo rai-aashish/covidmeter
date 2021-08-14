@@ -2,9 +2,9 @@
     
     <div class="mobile-nav navigation" :v-if="mobileNav">
       <ul>
-        <li><router-link to="/">Home</router-link> </li>
-        <li><router-link to="/about">About</router-link> </li>
-        <li><router-link to="/animation">Contacts</router-link></li>
+        <li><router-link to="/" @click="navLinkClicked">Home</router-link> </li>
+        <li><router-link to="/about" @click="navLinkClicked">About</router-link> </li>
+        <li><router-link to="/animation" @click="navLinkClicked">Contacts</router-link></li>
       </ul>
 
     </div>
@@ -13,10 +13,13 @@
 </template>
 <script>
 export default{
-  data(){
-    return{ 
+ 
+  methods:{
+        navLinkClicked(){
+            this.$emit('toggleMobileNav');
+       }
+        
     }
-  },
   
 }
 </script>
