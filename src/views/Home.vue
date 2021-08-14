@@ -4,14 +4,14 @@
           <div class="menu">
             <div class="heading">Options</div>
             <ul>
-              <li class="active-menu">All</li>
-              <li>Today</li>
+              <li class="active-menu" @click="allUpdates">All</li>
+              <li @click="todayUpdates">Today</li>
               <li>All</li>
             </ul>
           </div>
 
           <div class="display-content">
-          <covidAll/>
+          <covidAll :category="category"/>
           </div>
     </div>
 
@@ -24,10 +24,23 @@ import covidAll from '../components/covidAll.vue'
 
 export default {
   name: 'Home',
+  data(){
+    return{
+      category: 'All',
+    }
+  },
   components: {
     covidAll,
 
   
+  },
+  methods:{
+    allUpdates(){
+      this.category = "Total"
+    },
+    todayUpdates(){
+      this.category = "Today"
+    },
   }
 }
 </script>

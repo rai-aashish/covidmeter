@@ -1,14 +1,15 @@
 <template>
   <div class="all">
-       <div class="heading" @click="enter">Covid-19 cases All</div>
+       <div class="heading" @click="enter">Covid-19 cases  {{category}}</div>
 
       <div class="container">
-        <transition-group v-on:enter="enter" >
-          <div class="card">{{data.cases}}<h2 class="card__title">Total cases </h2></div>
-          <div class="card">{{data.deaths}}<h2 class="card__title">Total deaths</h2></div>
-          <div class="card">{{data.active}}<h2 class="card__title">Total active</h2></div>
-          <div class="card">{{data.recovered}}<h2 class="card__title">Total recovered </h2></div>
-        </transition-group>
+       
+   <transition-group :v-on-enter="enter">
+          <div class="card">{{getCases()}}<h2 class="card__title">{{category}} cases </h2></div>
+          <div class="card">{{getDeaths()}}<h2 class="card__title">{{category}} deaths</h2></div>
+          <div class="card">{{data.active}}<h2 class="card__title">Active</h2></div>
+          <div class="card">{{getRecovered()}}<h2 class="card__title">{{category}} recovered </h2></div>
+   </transition-group>
       </div>
         
       
@@ -21,6 +22,12 @@
 import axios from 'axios'
 import gsap from 'gsap'
 export default{
+  props:{
+      category : {
+        type:String,
+        default:'All'
+      }
+  },
   data(){
     return{
       data: Object, 
@@ -29,12 +36,44 @@ export default{
   methods:{
     enter(){
       gsap.from('.card',{
-        duration:0.5,
+        duration:0.3,
         x:450,
         opacity:0,
-        stagger:0.3,
+        stagger:0.2,
+      },0.5)
+    },
+    float(){
+      gsap.to('.card',{
+        duration:3,
+        x:20,
+        repeat:-1,
+        yoyo:true,
+        stagger:0.5
       })
-    }
+    },
+
+      getCases(){
+        if(this.category=="Total")
+          return this.data.cases
+        else if(this.category=="Today")
+          return this.data.todayCases
+        
+      },
+
+       getDeaths(){
+        if(this.category=="Total")
+          return this.data.deaths
+        else if(this.category=="Today")
+          return this.data.todayDeaths
+      },
+
+        getRecovered(){
+        if(this.category=="Total")
+          return this.data.recovered
+        else if(this.category=="Today")
+          return this.data.todayRecovered
+      }
+
   },
   mounted(){
 
@@ -44,6 +83,8 @@ export default{
       this.data = response.data;
       console.log(this.data);
     });
+
+     this.float();
   }
 
 }
@@ -76,10 +117,10 @@ export default{
   width: 200px;
   height: 150px;
   margin: 8px;
+  font-size: 20px;
   border: 1px solid rgba(247, 247, 247, 0.445);
   transform: $perspective-angle;
   letter-spacing: 1px;
-  transition: all 0.4s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -99,14 +140,11 @@ export default{
     background-color: $recovered;
   }
 
-  &:hover{
-    transform: unset;
-
-  }
+ 
   
 }
 .card__title {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: normal;
   letter-spacing: 0.1px;
   color: #fffbe1;
