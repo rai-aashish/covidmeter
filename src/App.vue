@@ -103,9 +103,11 @@ ul{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  min-height:100vh;
   color: #2c3e50;
   font-size: 14px;
   font-family: 'Montserrat', sans-serif;
+  overflow: hidden;
   //font-family: 'Roboto Condensed', sans-serif;
   
 }

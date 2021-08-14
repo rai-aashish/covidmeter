@@ -4,3 +4,17 @@ $primary:rgb(113, 44, 177);
 $secondary:rgb(253, 253, 253);
 $glow:rgb(251, 255, 29);
 $grey:rgb(185, 185, 185);
+
+//corona update card variables
+$death : rgba(241, 98, 98, 0.4);
+$cases  :rgba(219, 164, 44, 0.4);
+$recovered: rgba(81, 196, 81, 0.4);
+$active : rgba(69, 184, 238, 0.4);
+
+
+//variables
+$perspective-angle: rotateX(5deg) rotateY(0deg) rotateZ(-10deg);
+
+
+// screen
+$mobile-size:786px;
