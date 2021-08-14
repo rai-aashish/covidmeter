@@ -4,7 +4,7 @@
           <div class="menu">
             <div class="heading">Options</div>
             <ul>
-              <li>All</li>
+              <li class="active-menu">All</li>
               <li>Today</li>
               <li>All</li>
             </ul>
@@ -45,12 +45,27 @@ export default {
 
   .menu{
     width:20%;
-    background-color:rgba($primary,0.4);
+    background-color:rgba($primary,0.2);
+
+    li{
+      padding-block: 10px;
+      border-bottom: 1px solid $primary ;
+
+      &:hover{
+        color:$glow;     
+        border-bottom: 1px solid rgba($glow,0.7) ;
+      }
+      }
   }
 
+.active-menu{
+  background-color: rgba($primary,0.5);
+}
   .display-content{
     flex-basis: 80%;
     text-align: center;
+    background-color:rgba($primary,0.5);
+
    
   }
 }
@@ -59,5 +74,6 @@ export default {
   background-color: rgba(0, 0, 0, 0.6);
   padding-block: 15px;
 }
+
 
 </style>

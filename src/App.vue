@@ -2,13 +2,23 @@
   <div id="nav">
     <div class="logo"><span>covid</span>meter</div>
 
-    <div class="nav-links">
+    <transition name="slide-fade">
+      <mobileNav v-if="mobileNav"/>
+    </transition>
+
+    <div class="nav-links navigation" v-if="!mobileView">
       <ul>
         <li><router-link to="/">Home</router-link> </li>
         <li><router-link to="/about">About</router-link> </li>
         <li><router-link to="/animation">Contacts</router-link></li>
       </ul>
-   
+
+    </div>
+
+     <div class="nav-btn" v-if="mobileView" @click="toggleMobileNav" :class="{mobileNavActive: mobileNav}">
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
     </div>
   </div>
   
@@ -19,7 +29,52 @@
     Developed by Aashish Rai
   </div>
 </template>
+<script>
 
+import mobileNav from './components/mobileNav.vue'
+
+   export default {
+  name: 'Home',
+  data(){
+    return{
+      mobileView : false,
+      mobileNav : false,
+      windowWidth : null,
+
+
+    }
+  },
+
+  components:{
+    mobileNav,
+
+  },
+  
+  methods:{
+      toggleMobileNav(){
+          this.mobileNav = !this.mobileNav;
+      },
+      checkScreen(){
+          this.windowWidth = window.innerWidth;
+          if(this.windowWidth < 780){
+              this.mobileView =  true;
+              return;
+          }
+          else{
+              this.mobileView = false;
+              this.mobileNav =  false;
+              return;
+          }
+      }
+  },
+  created(){
+      window.addEventListener('resize', this.checkScreen);
+      this.checkScreen();
+
+  },
+
+   }
+</script>
 <style lang="scss">
 
 body{
@@ -27,6 +82,9 @@ body{
   
 }
 
+a{
+  text-decoration: none;
+}
 *{
   margin:0;
   padding:0;
@@ -69,29 +127,9 @@ padding:10px;
 
 
 
-#nav a.router-link-exact-active{
-  color: $nav-link;
-}
 
-#nav a.router-link-exact-active::before{
-  background-color: $nav-link;
-  width:100%
-}
-.nav-links{
-  display: flex;
-  max-width: 400px;
-  justify-content: space-between;
-  font-size: 13px;
-  text-transform: uppercase;
-
-  ul{
-    display: flex;
-
-    li{
-      margin-right: 20px;
-    }
-  }
-
+.navigation {
+  
   a {
   color: $secondary;
   text-decoration: none;
@@ -100,6 +138,8 @@ padding:10px;
 
    &::before{
     position: absolute;
+    left:0;
+    right:0;
     bottom:-2px;
     content:'';
     display: block;
@@ -111,18 +151,89 @@ padding:10px;
   }
 
   &:hover{
-    color:$nav-link;
+    color:$glow;
     
   &::before{
     width:100%;
-    background-color:$nav-link;
+    background-color:$glow;
   }
 
   }
 
  
   }
+  
+    a.router-link-exact-active::before{
+    width:100%
+  }
 
+}
+.nav-links{
+  display: flex;
+  max-width: 400px;
+  justify-content: space-between;
+  font-size: 13px;
+
+  ul{
+    display: flex;
+
+    li{
+      margin-right: 20px;
+    }
+  }
+
+
+}
+
+.nav-btn{
+  width:32px;
+  cursor: pointer;
+  z-index: 99;
+   &:hover{
+     .bar{
+       background-color: $glow;
+     } 
+    }
+
+  .bar{
+    width:100%;
+    background-color: #fff;
+    height:3px;
+    margin-bottom:6px;
+    transition: all 0.3s ease-in-out;
+  }
+
+}
+
+.mobileNavActive{
+  .bar:nth-child(1){
+    transform: rotate(45deg) translateY(12.5px)
+  }
+
+   .bar:nth-child(3){
+    transform: rotate(-45deg) translateY(-12.5px)
+  }
+
+  .bar:nth-child(2){
+    width:0;
+  }
+}
+
+
+.slide-fade-enter-active {
+  transition: all .5s ease;
+}
+.slide-fade-leave-active {
+  transition: all .5s ease;
+}
+
+.slide-fade-enter-from, .slide-fade-leave-to {
+  transform: translateX(20vw);
+  opacity: 0;
+}
+.slide-fade-enter-to, .slide-fade-leave-from{
+  transform: translateX(0);
+  opacity: 1;
 }
 
 .footer{
