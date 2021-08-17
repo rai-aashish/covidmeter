@@ -6,7 +6,6 @@
             <ul>
               <li class="active-menu" @click="allUpdates">All</li>
               <li @click="todayUpdates">Today</li>
-              <li>All</li>
             </ul>
           </div>
 
@@ -49,7 +48,7 @@ export default {
 <style lang="scss" scoped>
 
 .display{
-  background-color: rgba(49, 46, 46, 0.5);
+  background-color: rgba(214, 132, 132, 0.5);
   background-image:url('https://dailyiowan.com/wp-content/uploads/2020/03/TOP-2.jpg') ;
   background-repeat: no-repeat;
   

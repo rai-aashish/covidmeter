@@ -2,15 +2,15 @@
   <div class="all">
        <div class="heading" @click="enter">Covid-19 cases  {{category}}</div>
 
-      <div class="container">
-       
-   <transition-group :v-on-enter="enter">
-          <div class="card">{{getCases()}}<h2 class="card__title">{{category}} cases </h2></div>
-          <div class="card">{{getDeaths()}}<h2 class="card__title">{{category}} deaths</h2></div>
-          <div class="card">{{data.active}}<h2 class="card__title">Active</h2></div>
-          <div class="card">{{getRecovered()}}<h2 class="card__title">{{category}} recovered </h2></div>
-   </transition-group>
-      </div>
+    
+    
+   <div class="container">
+          <div class="card" v-if="true">{{getCases()}}<h2 class="card__title">{{category}} cases </h2></div>
+          <div class="card" v-if="true">{{getDeaths()}}<h2 class="card__title">{{category}} deaths</h2></div>
+          <div class="card" v-if="true">{{data.active}}<h2 class="card__title">Active</h2></div>
+          <div class="card" v-if="true">{{getRecovered()}}<h2 class="card__title">{{category}} recovered </h2></div>
+   </div>
+  
         
       
 
@@ -25,7 +25,7 @@ export default{
   props:{
       category : {
         type:String,
-        default:'All'
+        default:'Total'
       }
   },
   data(){
@@ -34,14 +34,9 @@ export default{
     }
   },
   methods:{
-    enter(){
-      gsap.from('.card',{
-        duration:0.3,
-        x:450,
-        opacity:0,
-        stagger:0.2,
-      },0.5)
-    },
+  
+  
+
     float(){
       gsap.to('.card',{
         duration:3,
@@ -53,25 +48,26 @@ export default{
     },
 
       getCases(){
-        if(this.category=="Total")
-          return this.data.cases
-        else if(this.category=="Today")
+        if(this.category=="Today")
           return this.data.todayCases
+       else
+          return this.data.cases
         
       },
 
        getDeaths(){
-        if(this.category=="Total")
-          return this.data.deaths
-        else if(this.category=="Today")
+        if(this.category=="Today")
           return this.data.todayDeaths
+        else
+          return this.data.deaths
+
       },
 
         getRecovered(){
-        if(this.category=="Total")
-          return this.data.recovered
-        else if(this.category=="Today")
+        if(this.category=="Today")
           return this.data.todayRecovered
+        else
+          return this.data.recovered
       }
 
   },
@@ -154,13 +150,19 @@ export default{
   margin: 0;
 }
 
-@keyframes cardAni
-{
-  0%{
-    transform: $perspective-angle;
-  }
-  100%{
-    transform:rotateX(45deg) rotateY(0deg) rotateZ(-35deg);;
-  }
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .8s ease;
+}
+.slide-fade-enter-from, .slide-fade-leave-to{
+  transform: translateX(100px);
+  opacity: 0;
+}
+
+.slide-fade-enter-to, .slide-fade-leave-from{
+  transform: translateX(0px);
+  opacity: 1;
 }
 </style>

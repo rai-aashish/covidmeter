@@ -4,7 +4,7 @@
       <ul>
         <li><router-link to="/" @click="navLinkClicked">Home</router-link> </li>
         <li><router-link to="/about" @click="navLinkClicked">About</router-link> </li>
-        <li><router-link to="/animation" @click="navLinkClicked">Contacts</router-link></li>
+        <li><router-link to="/contact" @click="navLinkClicked">Contacts</router-link></li>
       </ul>
 
     </div>

@@ -10,7 +10,7 @@
       <ul>
         <li><router-link to="/">Home</router-link> </li>
         <li><router-link to="/about">About</router-link> </li>
-        <li><router-link to="/animation">Contacts</router-link></li>
+        <li><router-link to="/contact">Contacts</router-link></li>
       </ul>
 
     </div>
@@ -22,7 +22,7 @@
     </div>
   </div>
   
-  <router-view/>
+    <router-view/>
 
 
   <div class="footer">
@@ -32,6 +32,7 @@
 <script>
 
 import mobileNav from './components/mobileNav.vue'
+import gsap from 'gsap'
 
 
    export default {
@@ -68,8 +69,11 @@ import mobileNav from './components/mobileNav.vue'
           }
       },
 
-      handleCreate(){
-        alert("nav created");
+      leave(el){
+        gsap.to(el,
+        {x:-100,
+          duration:0.5,
+        })
       }
   },
   created(){

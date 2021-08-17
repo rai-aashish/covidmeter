@@ -6,8 +6,12 @@
     @enter="enter"
     @leave="leave"
     >
-    <h1 class="test">This is an about page</h1>
+    <h1>About application</h1>
     </transition>
+
+   <div class="contents">
+     This project is developed to get statistics regarding cases of severe acute respiratory syndrome coronavirus 2" (SARS-CoV-2) A.K.A COVID-19.
+   </div> 
   </div>
 
 </template>
@@ -57,27 +61,19 @@ export default{
 </script>
 
 <style lang="scss" scoped>
-
-
-.test{
-  color:$primary
-}
-
-.card{
-  background-color:$primary;
+.about{
   color:$secondary;
-  width:300px;
-  height:300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation-name: bg;
-  animation-duration:1s;
-  animation-iteration-count:infinite ;
+
+  h1{
+    color:$primary;
+    text-shadow: 2px 1px 2px rgba(255, 255, 255, 0.9);
+  }
+
+  .contents{
+    font-size: 15px;
+    font-family: 'Roboto Condensed', sans-serif;
+    margin-top:10px;
+  }
 }
-@keyframes bg{
-  0% {  background:linear-gradient(to right,aqua,blue)}
-  50% {  background:linear-gradient(to right,rgb(0, 132, 255),rgb(0, 119, 255))}
-  100% {  background:linear-gradient(to right,aqua,blue)}
-}
+
 </style>
